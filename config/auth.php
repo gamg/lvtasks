@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Taskapp\User::class,
+            'model' => Taskapp\Models\User::class,
         ],
 
         // 'users' => [
