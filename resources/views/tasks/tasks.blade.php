@@ -8,13 +8,16 @@
                     <h3 class="panel-title">Mis Tareas</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <th>Completada</th>
-                            <th>Tarea</th>
-                            <th>Acciones</th>
-                        </thead>
-                        <tbody>
+                    <a href="{{route('tasks.create')}}" class="btn btn-primary btn-sm">Nueva</a>
+                    @include('partials.message')
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th>Completada</th>
+                                <th>Tarea</th>
+                                <th>Acciones</th>
+                            </thead>
+                            <tbody>
                             @foreach($tasks as $task)
                                 <tr>
                                     <td>...</td>
@@ -22,8 +25,9 @@
                                     <td>...</td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
