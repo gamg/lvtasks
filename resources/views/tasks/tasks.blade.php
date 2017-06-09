@@ -22,7 +22,9 @@
                                 <tr>
                                     <td>...</td>
                                     <td>{{$task->name}}</td>
-                                    <td>...</td>
+                                    <td>
+                                        <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info">Editar</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
