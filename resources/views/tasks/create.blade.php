@@ -12,6 +12,7 @@
                     <form action="{{(isset($data)) ? $data['route'] : route('tasks.store')}}"
                           method="POST">
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <div class="form-group">
                             <label class="control-label">Tarea</label>
                             @if(isset($task))

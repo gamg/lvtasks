@@ -30,9 +30,8 @@ class TasksController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function getEdit($id)
+    public function getEdit(Task $task)
     {
-        $task = Task::find($id);
         if (is_null($task)) return redirect()->route('tasks.index');
 
         $data = [
@@ -44,9 +43,8 @@ class TasksController extends Controller
         return view('tasks.create')->with('data', $data)->with('task', $task);
     }
 
-    public function postUpdate(CreateEditRequest $request, $id)
+    public function putUpdate(CreateEditRequest $request, Task $task)
     {
-        $task = Task::find($id);
         if (is_null($task)) return redirect()->route('tasks.index');
 
         $task->fill($request->all());
@@ -56,6 +54,20 @@ class TasksController extends Controller
             'alert' => 'success',
             'text' => '¡Bien! Tarea editada correctamente.'
         ]);
+        return redirect()->route('tasks.index');
+    }
+
+    public function destroy(Task $task)
+    {
+        if (is_null($task)) return redirect()->route('tasks.index');
+
+        $task->delete();
+
+        session()->flash('message', [
+            'alert' => 'info',
+            'text' => 'Tarea eliminada correctamente. =('
+        ]);
+
         return redirect()->route('tasks.index');
     }
 }

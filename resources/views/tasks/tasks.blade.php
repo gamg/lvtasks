@@ -20,10 +20,17 @@
                             <tbody>
                             @foreach($tasks as $task)
                                 <tr>
-                                    <td>...</td>
+                                    <td class="{{($task->completed == 'Si') ? 'text-success' : 'text-danger'}}">
+                                        {{$task->completed}}
+                                    </td>
                                     <td>{{$task->name}}</td>
                                     <td>
-                                        <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info">Editar</a>
+                                        <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info" style="float: left">Editar</a>
+                                        <form action="{{route('tasks.delete', $task->id)}}" method="POST" style="float: left; margin-left: 2px;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
