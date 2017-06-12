@@ -26,6 +26,6 @@ $factory->define(Taskapp\Models\User::class, function (Faker\Generator $faker) {
 $factory->define(Taskapp\Models\Task::class, function(Faker\Generator $faker){
     return [
         'user_id' => $faker->numberBetween(1,8),
-        'name' => $faker->text(100),
+        'description' => $faker->text(100),
     ];
 });

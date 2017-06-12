@@ -12,15 +12,15 @@
                     <form action="{{(isset($data)) ? $data['route'] : route('tasks.store')}}"
                           method="POST">
                         {{ csrf_field() }}
-                        {{ method_field('PUT') }}
+                        @if(isset($task)) {{ method_field('PUT') }} @endif
                         <div class="form-group">
                             <label class="control-label">Tarea</label>
                             @if(isset($task))
-                                <input type="text" name="name" class="form-control"
-                                       value="{{(!empty(old('name'))) ? old('name') : $task->name }}" required>
+                                <input type="text" name="description" class="form-control"
+                                       value="{{(!empty(old('description'))) ? old('description') : $task->description }}" required>
                             @else
-                                <input type="text" name="name" class="form-control"
-                                       value="{{ old('name') }}" required>
+                                <input type="text" name="description" class="form-control"
+                                       value="{{ old('description') }}" required>
                             @endif
                         </div>
                         <div class="form-group">

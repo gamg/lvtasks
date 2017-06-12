@@ -23,7 +23,7 @@
                                     <td class="{{($task->completed == 'Si') ? 'text-success' : 'text-danger'}}">
                                         {{$task->completed}}
                                     </td>
-                                    <td>{{$task->name}}</td>
+                                    <td>{{$task->description}}</td>
                                     <td>
                                         <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info" style="float: left">Editar</a>
                                         <form action="{{route('tasks.delete', $task->id)}}" method="POST" style="float: left; margin-left: 2px;">

@@ -25,7 +25,7 @@ class TasksController extends Controller
         $request->user()->tasks()->create($request->all());
         session()->flash('message', [
             'alert' => 'success',
-            'text' => '¡Bien! Tarea guardada correctamente.'
+            'text' => trans('messages.created')
         ]);
         return redirect()->route('tasks.index');
     }
