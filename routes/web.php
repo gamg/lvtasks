@@ -16,6 +16,8 @@ Route::group(['namespace' => 'Backend'], function (){
     Route::delete('tasks/{task}', 'TasksController@destroy')->name('tasks.delete');
 
     Route::resource('users', 'UsersController');
+
+    Route::resource('categories', 'CategoriesController');
 });
 
 

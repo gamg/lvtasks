@@ -47,6 +47,7 @@
                     <ul class="nav navbar-nav">
                         @if(Auth::check())
                             <li><a href="{{ route('tasks.index') }}">Tareas</a></li>
+                            <li><a href="{{ route('categories.index') }}">Categorías</a></li>
                         @endif
                     </ul>
 
