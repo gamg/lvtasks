@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger">Sí estoy seguro</button>
+                <button id="yes-delete" type="button" class="btn btn-danger" data-dismiss="modal">Sí estoy seguro</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
