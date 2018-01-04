@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Taskapp\Events\SomeEvent' => [
+        'Taskapp\Events\Event' => [
             'Taskapp\Listeners\EventListener',
         ],
     ];

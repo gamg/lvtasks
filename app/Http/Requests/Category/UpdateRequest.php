@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Route;
 use Illuminate\Validation\Rule;
 
-class EditRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     protected $route;
 
