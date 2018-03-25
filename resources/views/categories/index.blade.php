@@ -40,3 +40,7 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    @include('partials.toastr-messages')
+@endsection

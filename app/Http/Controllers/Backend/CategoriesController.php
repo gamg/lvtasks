@@ -5,7 +5,7 @@ namespace Taskapp\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use Taskapp\Http\Controllers\Controller;
 use Taskapp\Http\Requests\Category\CreateRequest;
-use Taskapp\Http\Requests\Category\EditRequest;
+use Taskapp\Http\Requests\Category\UpdateRequest;
 use Taskapp\Models\Category;
 
 class CategoriesController extends Controller
@@ -103,7 +103,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $category = Category::find($id);
         if (is_null($category)) return redirect()->route('categories.index');

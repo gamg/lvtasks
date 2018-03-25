@@ -79,5 +79,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @section('scripts')
+    @show
 </body>
 </html>
