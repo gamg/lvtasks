@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use Taskapp\Http\Controllers\Controller;
 use Taskapp\Http\Requests\Category\CreateRequest;
 use Taskapp\Http\Requests\Category\UpdateRequest;
-use Taskapp\Models\Category;
+use Taskapp\Repositories\Category\CategoryRepository;
 
 class CategoriesController extends Controller
 {
+    protected $categoryRepo;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepo = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepo->getAll();
         return view('categories.index')->with('categories', $categories);
     }
 
@@ -46,8 +53,7 @@ class CategoriesController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $category = new Category();
-        $category->create($request->all());
+        $this->categoryRepo->create($request->all());
 
         session()->flash('message', [
             'alert' => 'success',
@@ -65,13 +71,13 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepo->find($id);
 
         if (is_null($category)) {
             return redirect()->route('categories.index');
         }
 
-        return view('tasks.tasks')->with('category_id', $category->id);
+        return redirect()->route('tasks.index', ['category' => $category->id]);
     }
 
     /**
@@ -82,7 +88,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepo->find($id);
         if (is_null($category)) return redirect()->route('categories.index');
 
         $header = ['route' => ['categories.update', $category->id], 'method' => 'PUT'];
@@ -105,11 +111,10 @@ class CategoriesController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepo->find($id);
         if (is_null($category)) return redirect()->route('categories.index');
 
-        $category->fill($request->all());
-        $category->save();
+        $this->categoryRepo->update($category, $request->all());
 
         session()->flash('message', [
             'alert' => 'success',
@@ -128,9 +133,9 @@ class CategoriesController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
-            $category = Category::find($id);
+            $category = $this->categoryRepo->find($id);
             if (!is_null($category)) {
-                $category->delete();
+                $this->categoryRepo->delete($category);
                 return response()->json([
                     'response' => true,
                     'id' => $category->id,
