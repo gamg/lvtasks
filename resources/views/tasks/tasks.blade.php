@@ -36,6 +36,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <section class="text-center">
+                        {{ $tasks->links() }}
+                    </section>
                 </div>
             </div>
         </div>

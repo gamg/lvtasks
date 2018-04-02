@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 use Taskapp\Http\Controllers\Controller;
 use Taskapp\Http\Requests\Task\CreateEditRequest;
 use Taskapp\Models\Task;
+use Taskapp\Repositories\Task\TaskRepository;
 
 class TasksController extends Controller
 {
+    protected $taskRepository;
+
+    public function __construct(TaskRepository $taskRepository)
+    {
+        $this->taskRepository = $taskRepository;
+    }
+
     public function getIndex(Request $request)
     {
-        $tasks = $request->user()->tasks()->get();
+        $tasks = $this->taskRepository->userTasks($request->user());
         return view('tasks.tasks')->with('tasks', $tasks);
     }
 
@@ -22,7 +30,7 @@ class TasksController extends Controller
 
     public function postStore(CreateEditRequest $request)
     {
-        $request->user()->tasks()->create($request->all());
+        $this->taskRepository->createUserTask($request);
         session()->flash('message', [
             'alert' => 'success',
             'text' => trans('messages.created')
@@ -47,8 +55,7 @@ class TasksController extends Controller
     {
         if (is_null($task)) return redirect()->route('tasks.index');
 
-        $task->fill($request->all());
-        $task->save();
+        $this->taskRepository->update($task, $request->all());
 
         session()->flash('message', [
             'alert' => 'success',
@@ -61,7 +68,7 @@ class TasksController extends Controller
     {
         if (is_null($task)) return redirect()->route('tasks.index');
 
-        $task->delete();
+        $this->taskRepository->delete($task);
 
         session()->flash('message', [
             'alert' => 'info',
