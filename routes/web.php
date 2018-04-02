@@ -15,6 +15,8 @@ Route::group(['namespace' => 'Backend'], function (){
     Route::get('tasks/edit/{task}', 'TasksController@getEdit')->name('tasks.edit');
     Route::put('tasks/update/{task}', 'TasksController@putUpdate')->name('tasks.update');
     Route::delete('tasks/{task}', 'TasksController@destroy')->name('tasks.delete');
+    Route::post('tasks/complete/{id}', 'TasksController@postComplete')->name('tasks.complete');
+
     Route::resource('users', 'UsersController');
 
     Route::resource('categories', 'CategoriesController');

@@ -8,7 +8,6 @@
                 </div>
                 <div class="panel-body">
                     <a href="{{route('tasks.create')}}" class="btn btn-primary btn-sm">Nueva</a>
-                    @include('partials.message')
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -19,8 +18,13 @@
                             <tbody>
                             @foreach($tasks as $task)
                                 <tr>
-                                    <td class="{{($task->completed == 'Si') ? 'text-success' : 'text-danger'}}">
-                                        {{$task->completed}}
+                                    <td>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="ckbox" {{ ($task->completed) ? 'checked' : '' }}
+                                                data-route="{{ route('tasks.complete', $task->id) }}">
+                                            </label>
+                                        </div>
                                     </td>
                                     <td>{{$task->description}}</td>
                                     <td>
@@ -42,4 +46,8 @@
                 </div>
             </div>
         </div>
+@endsection
+
+@section('scripts')
+    @include('partials.toastr-messages')
 @endsection

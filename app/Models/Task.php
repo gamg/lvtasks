@@ -14,9 +14,4 @@ class Task extends Model
     {
         return $this->belongsTo('Taskapp\Models\User');
     }
-
-    public function getCompletedAttribute($value)
-    {
-        return ($value) ? 'Si' : 'NO';
-    }
 }

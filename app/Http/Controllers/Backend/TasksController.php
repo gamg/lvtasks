@@ -77,4 +77,23 @@ class TasksController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function postComplete(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $task = $this->taskRepository->find($id);
+            if (!is_null($task)) {
+                $this->taskRepository->setComplete($task, $request->complete);
+                return response()->json([
+                    'response' => true,
+                    'message' => 'Tarea completada!',
+                    'type' => $request->complete
+                ]);
+            }
+            return response()->json([
+                'response' => false,
+                'message' => 'Ha ocurrido un error, intente de nuevo.',
+            ]);
+        }
+    }
 }

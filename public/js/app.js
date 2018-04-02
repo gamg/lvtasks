@@ -11223,7 +11223,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(46);
 
 
 /***/ }),
@@ -11239,8 +11239,9 @@ module.exports = __webpack_require__(45);
 
 __webpack_require__(12);
 __webpack_require__(37);
+__webpack_require__(38);
 
-window.Vue = __webpack_require__(38);
+window.Vue = __webpack_require__(39);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -11248,7 +11249,7 @@ window.Vue = __webpack_require__(38);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(41));
+Vue.component('example-component', __webpack_require__(42));
 
 var app = new Vue({
   el: '#app'
@@ -11268,15 +11269,21 @@ window._ = __webpack_require__(13);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(3);
+    window.$ = window.jQuery = __webpack_require__(3);
 
-  __webpack_require__(15);
+    __webpack_require__(15);
 } catch (e) {}
 
 toastr = __webpack_require__(16);
 toastr.options = {
-  "progressBar": true
+    "progressBar": true
 };
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -11297,9 +11304,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -32235,6 +32242,25 @@ $(document).ready(function () {
 
 /***/ }),
 /* 38 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    $("table div.checkbox").on("click", "input#ckbox", function () {
+        var complete = $(this).is(':checked') ? 1 : 0;
+        $.post($(this).data('route'), { complete: complete }, function (data) {
+            if (data.response) {
+                if (data.type == 1) {
+                    toastr.success(data.message);
+                }
+            } else {
+                toastr.error(data.message);
+            }
+        });
+    });
+});
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43048,10 +43074,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(39).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -43104,13 +43130,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(40);
+__webpack_require__(41);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -43303,15 +43329,15 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5)))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(42)
+var normalizeComponent = __webpack_require__(43)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(45)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43350,7 +43376,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -43459,7 +43485,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43488,7 +43514,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -43531,7 +43557,7 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

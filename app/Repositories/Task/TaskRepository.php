@@ -23,4 +23,10 @@ class TaskRepository extends BaseRepository
     {
         $request->user()->tasks()->create($request->all());
     }
+
+    public function setComplete($task, $complete)
+    {
+        $task->completed = $complete;
+        $task->save();
+    }
 }
