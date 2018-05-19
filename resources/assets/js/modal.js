@@ -6,11 +6,13 @@ $(document).ready(function(){
     });
 
     $('#yes-delete').on('click', function () {
+        $('#pleaseWait').modal('show');
         $.ajax({
             type: $('#form-delete').attr('method'),
             url: $('#form-delete').attr('action'),
             data: $('#form-delete').serialize(),
             success: function (data) {
+                $('#pleaseWait').modal('hide');
                 if (data.response) {
                     $('table tr').each(function () {
                         if ($(this).data('id') == data.id) {
@@ -23,6 +25,7 @@ $(document).ready(function(){
                 }
             },
             error: function () {
+                $('#pleaseWait').modal('hide');
                 toastr.error('Error, intente más tarde');
             }
         });

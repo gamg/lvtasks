@@ -17,3 +17,21 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal" id="pleaseWait" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-time"></span>
+                    Por favor espere...
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-info active" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
