@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('Taskapp\Models\Task');
     }
+
+    public function categories()
+    {
+        return $this->hasMany('Taskapp\Models\Category');
+    }
 }

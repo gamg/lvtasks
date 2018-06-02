@@ -22,9 +22,9 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = $this->categoryRepo->getAll();
+        $categories = $this->categoryRepo->userCategories($request->user());
         return view('categories.index')->with('categories', $categories);
     }
 
@@ -53,7 +53,7 @@ class CategoriesController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $this->categoryRepo->create($request->all());
+        $this->categoryRepo->createUserCategory($request);
 
         session()->flash('message', [
             'alert' => 'success',

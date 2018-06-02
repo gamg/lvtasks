@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class AddColumnUserIdToCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('tasks')) {
-            Schema::create('tasks', function (Blueprint $table) {
-                $table->increments('id');
-                $table->unsignedInteger('user_id');
-                $table->string('description');
-                $table->boolean('completed')->default(false);
-                $table->timestamps();
+        if (Schema::hasTable('categories') && !Schema::hasColumn('categories', 'user_id')) {
+            Schema::table('categories', function (Blueprint $table) {
+                $table->integer('user_id')->unsigned()->after('name');
                 $table->foreign('user_id')->references('id')->on('users')
                     ->onDelete('cascade');
             });
@@ -33,6 +29,9 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign('categories_user_id_foreign');
+            $table->dropColumn('user_id');
+        });
     }
 }
