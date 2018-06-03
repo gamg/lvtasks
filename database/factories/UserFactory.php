@@ -25,9 +25,17 @@ $factory->define(Taskapp\Models\User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(Taskapp\Models\Category::class, function(Faker $faker){
+    return [
+        'user_id' => $faker->numberBetween(1,8),
+        'name' => $faker->text(100),
+    ];
+});
+
 $factory->define(Taskapp\Models\Task::class, function(Faker $faker){
     return [
         'user_id' => $faker->numberBetween(1,8),
         'description' => $faker->text(100),
+        'category_id' => $faker->numberBetween(1,3),
     ];
 });
