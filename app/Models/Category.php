@@ -12,4 +12,9 @@ class Category extends Model
     {
         return $this->belongsTo('Taskapp\Models\User');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany('Taskapp\Models\Task');
+    }
 }

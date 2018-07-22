@@ -13,6 +13,7 @@
                             <thead>
                                 <th>Completada</th>
                                 <th>Tarea</th>
+                                <th>Categoría</th>
                                 <th>Acciones</th>
                             </thead>
                             <tbody>
@@ -27,9 +28,10 @@
                                         </div>
                                     </td>
                                     <td>{{$task->description}}</td>
-                                    <td>
-                                        <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info" style="float: left">Editar</a>
-                                        <form action="{{route('tasks.delete', $task->id)}}" method="POST" style="float: left; margin-left: 2px;">
+                                    <td>{{$task->category->name}}</td>
+                                    <td style="display: flex">
+                                        <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-info">Editar</a>
+                                        <form action="{{route('tasks.delete', $task->id)}}" method="POST" style="margin-left: 2px;">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" class="btn btn-danger">Eliminar</button>

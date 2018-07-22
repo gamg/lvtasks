@@ -24,7 +24,8 @@ class CreateEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|max:255'
+            'description' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id'
         ];
     }
 }

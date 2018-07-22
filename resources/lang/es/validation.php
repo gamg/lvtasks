@@ -106,6 +106,9 @@ return [
         'email' => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
+        'category_id' => [
+            'required' => 'El campo :attribute es obligatorio. Recuerda que debes crear categorías para crear Tareas.',
+        ],
     ],
 
     /*
@@ -123,7 +126,8 @@ return [
         'name' => 'Nombre',
         'description' => 'Descripción de Tarea',
         'email' => 'Correo electrónico',
-        'password' => 'Contraseña'
+        'password' => 'Contraseña',
+        'category_id' => 'Categoría'
     ],
 
 ];

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @inject('categories', 'Taskapp\Services\Categories')
     <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -21,6 +22,13 @@
                                 <input type="text" name="description" class="form-control"
                                        value="{{ old('description') }}" required>
                             @endif
+                        </div>
+                        <div class="form-group">
+                            <select name="category_id" class="form-control">
+                                @foreach($categories->get() as $id => $category)
+                                    <option value="{{$id}}" {{ (isset($task) && $task->category->id == $id) ? 'selected' : '' }}>{{ $category }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
