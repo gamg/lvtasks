@@ -7,6 +7,7 @@ use Taskapp\Http\Controllers\Controller;
 use Taskapp\Http\Requests\Category\CreateRequest;
 use Taskapp\Http\Requests\Category\UpdateRequest;
 use Taskapp\Repositories\Category\CategoryRepository;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
 {
@@ -91,6 +92,10 @@ class CategoriesController extends Controller
         $category = $this->categoryRepo->find($id);
         if (is_null($category)) return redirect()->route('categories.index');
 
+        if(!Auth::user()->can('check-category', $category)) {
+            return redirect('categories');
+        }
+
         $header = ['route' => ['categories.update', $category->id], 'method' => 'PUT'];
 
         $data = [
@@ -114,6 +119,10 @@ class CategoriesController extends Controller
         $category = $this->categoryRepo->find($id);
         if (is_null($category)) return redirect()->route('categories.index');
 
+        if(!$request->user()->can('check-category', $category)) {
+            return redirect('categories');
+        }
+
         $this->categoryRepo->update($category, $request->all());
 
         session()->flash('message', [
@@ -135,6 +144,12 @@ class CategoriesController extends Controller
         if ($request->ajax()) {
             $category = $this->categoryRepo->find($id);
             if (!is_null($category)) {
+                if(!$request->user()->can('check-category', $category)) {
+                    return response()->json([
+                        'response' => false,
+                        'message' => 'Ha ocurrido un error, No tienes permisos para hacer eso.',
+                    ]);
+                }
                 $this->categoryRepo->delete($category);
                 return response()->json([
                     'response' => true,

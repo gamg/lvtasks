@@ -41,6 +41,11 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'customMiddleware' => [
+            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+            'active' => \Taskapp\Http\Middleware\IsActive::class,
+        ],
     ];
 
     /**
@@ -57,5 +62,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Taskapp\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'active' => \Taskapp\Http\Middleware\IsActive::class,
     ];
 }

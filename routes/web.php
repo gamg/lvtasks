@@ -5,10 +5,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Route::group(['namespace' => 'Backend'], function (){
+Route::group(['namespace' => 'Backend', 'middleware' => 'customMiddleware'], function (){
     Route::get('tasks/', 'TasksController@getIndex')->name('tasks.index');
     Route::get('tasks/create', 'TasksController@getCreate')->name('tasks.create');
     Route::post('tasks/store', 'TasksController@postStore')->name('tasks.store');

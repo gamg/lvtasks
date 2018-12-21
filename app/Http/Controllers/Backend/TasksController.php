@@ -7,6 +7,7 @@ use Taskapp\Http\Controllers\Controller;
 use Taskapp\Http\Requests\Task\CreateEditRequest;
 use Taskapp\Models\Task;
 use Taskapp\Repositories\Task\TaskRepository;
+use Illuminate\Support\Facades\Gate;
 
 class TasksController extends Controller
 {
@@ -42,6 +43,10 @@ class TasksController extends Controller
     {
         if (is_null($task)) return redirect()->route('tasks.index');
 
+        if (Gate::denies('check-task', $task)) {
+            return redirect('tasks');
+        }
+
         $data = [
             'route'  =>  route('tasks.update', $task->id),
             'title'  =>  'Editando tarea',
@@ -53,6 +58,10 @@ class TasksController extends Controller
 
     public function putUpdate(CreateEditRequest $request, Task $task)
     {
+        if (Gate::denies('check-task', $task)) {
+            return redirect('tasks');
+        }
+
         if (is_null($task)) return redirect()->route('tasks.index');
 
         $this->taskRepository->update($task, $request->all());
@@ -67,6 +76,10 @@ class TasksController extends Controller
     public function destroy(Task $task)
     {
         if (is_null($task)) return redirect()->route('tasks.index');
+
+        if (Gate::denies('check-task', $task)) {
+            return redirect('tasks');
+        }
 
         $this->taskRepository->delete($task);
 

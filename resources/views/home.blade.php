@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if(Auth::user()->active)
+                        Bienvenido!
+                    @else
+                        Tu cuenta ha sido desactivada, comunicate con el administrador.
+                    @endif
                 </div>
             </div>
         </div>
