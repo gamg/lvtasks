@@ -7,7 +7,16 @@
                     <h3 class="panel-title">Mis Tareas</h3>
                 </div>
                 <div class="panel-body">
-                    <a href="{{route('tasks.create')}}" class="btn btn-primary btn-sm">Nueva</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section class="pull-left">
+                                <a href="{{route('tasks.create')}}" class="btn btn-primary">Nueva</a>
+                            </section>
+                            <section class="pull-right">
+                                @include('tasks.partials.search')
+                            </section>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>

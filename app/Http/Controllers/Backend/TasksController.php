@@ -20,7 +20,7 @@ class TasksController extends Controller
 
     public function getIndex(Request $request)
     {
-        $tasks = $this->taskRepository->userTasks($request->user());
+        $tasks = $this->taskRepository->search($request->user(), $request->all());
         return view('tasks.tasks')->with('tasks', $tasks);
     }
 

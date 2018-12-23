@@ -25,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = $this->categoryRepo->userCategories($request->user());
+        $categories = $this->categoryRepo->userCategories($request->user(), false);
         return view('categories.index')->with('categories', $categories);
     }
 
