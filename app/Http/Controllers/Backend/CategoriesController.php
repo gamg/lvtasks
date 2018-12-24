@@ -78,7 +78,7 @@ class CategoriesController extends Controller
             return redirect()->route('categories.index');
         }
 
-        return redirect()->route('tasks.index', ['category' => $category->id]);
+        return redirect()->route('tasks.index', ['task_category' => $category->id]);
     }
 
     /**

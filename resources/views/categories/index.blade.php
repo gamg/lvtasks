@@ -22,8 +22,8 @@
                                 <td>
                                     {{$category->name}}
                                 </td>
-                                <td>7</td>
-                                <td>3</td>
+                                <td>{{ $category->completed_tasks }}</td>
+                                <td>{{ $category->pending_tasks }}</td>
                                 <td>
                                     <a href="{{route('categories.show', $category->id)}}" class="btn btn-info">Ver tareas</a>
                                     <a href="{{route('categories.edit', $category->id)}}" class="btn btn-info action">Editar</a>
