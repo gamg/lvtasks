@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
             'name' => 'tavo',
             'email' => 'adolfz10@gmail.com',
             'password' => bcrypt('123456'),
-            'type' => 1,
         ]);
 
         factory(Taskapp\Models\User::class, 7)->create();

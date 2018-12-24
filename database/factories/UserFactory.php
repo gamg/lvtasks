@@ -20,7 +20,6 @@ $factory->define(Taskapp\Models\User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'type' => $faker->numberBetween(1,2),
         'remember_token' => str_random(10),
     ];
 });

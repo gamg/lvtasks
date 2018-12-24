@@ -2,7 +2,7 @@
 
 namespace Taskapp\Http\Controllers\Auth;
 
-use Taskapp\User;
+use Taskapp\Models\User;
 use Taskapp\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
